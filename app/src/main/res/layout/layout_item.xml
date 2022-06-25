@@ -20,7 +20,7 @@
             android:layout_height="96dp"
             android:src="@drawable/googleg_standard_color_18"
             android:padding="5dp"
-            android:id="@+id/img_emp"/>
+            android:id="@+id/img_dh"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,14 +31,14 @@
                 android:text="Text"
                 android:textSize="20sp"
                 android:layout_marginBottom="5dp"
-                android:id="@+id/txt_name"/>
+                android:id="@+id/lblCanton"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Text"
                 android:textSize="20sp"
                 android:layout_marginBottom="5dp"
-                android:id="@+id/txt_position"/>
+                android:id="@+id/lblDistrito"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

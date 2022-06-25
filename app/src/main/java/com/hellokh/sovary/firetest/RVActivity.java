@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,7 +19,7 @@ public class RVActivity extends AppCompatActivity
     SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView recyclerView;
     RVAdapter adapter;
-    DAOEmployee dao;
+    DAODerrumbeHueco dao;
     boolean isLoading=false;
     String key =null;
     @Override
@@ -35,7 +34,7 @@ public class RVActivity extends AppCompatActivity
         recyclerView.setLayoutManager(manager);
         adapter= new RVAdapter(this);
         recyclerView.setAdapter(adapter);
-        dao = new DAOEmployee();
+        dao = new DAODerrumbeHueco();
         loadData();
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
         {
@@ -66,15 +65,15 @@ public class RVActivity extends AppCompatActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot)
             {
-                ArrayList<Employee> emps = new ArrayList<>();
+                ArrayList<DerrumbeHueco> dhs = new ArrayList<>();
                 for (DataSnapshot data : snapshot.getChildren())
                 {
-                    Employee emp = data.getValue(Employee.class);
-                    emp.setKey(data.getKey());
-                    emps.add(emp);
+                    DerrumbeHueco dh = data.getValue(DerrumbeHueco.class);
+                    dh.setKey(data.getKey());
+                    dhs.add(dh);
                     key = data.getKey();
                 }
-                adapter.setItems(emps);
+                adapter.setItems(dhs);
                 adapter.notifyDataSetChanged();
                 isLoading =false;
                 swipeRefreshLayout.setRefreshing(false);

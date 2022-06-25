@@ -1,7 +1,5 @@
 package com.hellokh.sovary.firetest;
 
-import android.util.Log;
-
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -9,17 +7,17 @@ import com.google.firebase.database.Query;
 
 import java.util.HashMap;
 
-public class DAOEmployee
+public class DAODerrumbeHueco
 {
     private DatabaseReference databaseReference;
-    public DAOEmployee()
+    public DAODerrumbeHueco()
     {
         FirebaseDatabase db =FirebaseDatabase.getInstance();
-        databaseReference = db.getReference(Employee.class.getSimpleName());
+        databaseReference = db.getReference(DerrumbeHueco.class.getSimpleName());
     }
-    public Task<Void> add(Employee emp)
+    public Task<Void> add(DerrumbeHueco dh)
     {
-        return databaseReference.push().setValue(emp);
+        return databaseReference.push().setValue(dh);
     }
 
     public Task<Void> update(String key, HashMap<String ,Object> hashMap)

@@ -19,37 +19,37 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final EditText edit_name = findViewById(R.id.edit_name);
-        final EditText edit_position = findViewById(R.id.edit_position);
-        Button btn = findViewById(R.id.btn_submit);
-        Button btn_open = findViewById(R.id.btn_open);
-        btn_open.setOnClickListener(v->
+        final EditText edit_canton = findViewById(R.id.txtCanton);
+        final EditText edit_distrito = findViewById(R.id.txtDistrito);
+        Button btnGuardar = findViewById(R.id.btnGuardar);
+        Button btnLista = findViewById(R.id.btnLista);
+        btnLista.setOnClickListener(v->
         {
             Intent intent =new Intent(MainActivity.this, RVActivity.class);
             startActivity(intent);
         });
-        DAOEmployee dao =new DAOEmployee();
-        Employee emp_edit = (Employee)getIntent().getSerializableExtra("EDIT");
-        if(emp_edit !=null)
+        DAODerrumbeHueco dao =new DAODerrumbeHueco();
+        DerrumbeHueco dh_edit = (DerrumbeHueco)getIntent().getSerializableExtra("EDITAR");
+        if(dh_edit !=null)
         {
-            btn.setText("UPDATE");
-            edit_name.setText(emp_edit.getName());
-            edit_position.setText(emp_edit.getPosition());
-            btn_open.setVisibility(View.GONE);
+            btnGuardar.setText("Editar");
+            edit_canton.setText(dh_edit.getCanton());
+            edit_distrito.setText(dh_edit.getDistrito());
+            btnLista.setVisibility(View.GONE);
         }
         else
         {
-            btn.setText("SUBMIT");
-            btn_open.setVisibility(View.VISIBLE);
+            btnGuardar.setText("Guardar");
+            btnLista.setVisibility(View.VISIBLE);
         }
-        btn.setOnClickListener(v->
+        btnGuardar.setOnClickListener(v->
         {
-            Employee emp = new Employee(edit_name.getText().toString(), edit_position.getText().toString());
-            if(emp_edit==null)
+            DerrumbeHueco dh = new DerrumbeHueco(edit_canton.getText().toString(), edit_distrito.getText().toString());
+            if(dh_edit==null)
             {
-                dao.add(emp).addOnSuccessListener(suc ->
+                dao.add(dh).addOnSuccessListener(suc ->
                 {
-                    Toast.makeText(this, "Record is inserted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Registro guardado", Toast.LENGTH_SHORT).show();
                 }).addOnFailureListener(er ->
                 {
                     Toast.makeText(this, "" + er.getMessage(), Toast.LENGTH_SHORT).show();
@@ -58,11 +58,11 @@ public class MainActivity extends AppCompatActivity
             else
             {
                 HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put("name", edit_name.getText().toString());
-                hashMap.put("position", edit_position.getText().toString());
-                dao.update(emp_edit.getKey(), hashMap).addOnSuccessListener(suc ->
+                hashMap.put("canton", edit_canton.getText().toString());
+                hashMap.put("distrito", edit_distrito.getText().toString());
+                dao.update(dh_edit.getKey(), hashMap).addOnSuccessListener(suc ->
                 {
-                    Toast.makeText(this, "Record is updated", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Registro editado", Toast.LENGTH_SHORT).show();
                     finish();
                 }).addOnFailureListener(er ->
                 {

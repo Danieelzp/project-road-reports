@@ -7,38 +7,43 @@
     tools:context=".MainActivity"
     android:padding="15dp"
     android:orientation="vertical">
+
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="175dp"
         android:scaleType="fitXY"
-        android:src="@drawable/download"/>
+        android:src="@drawable/roadbanner" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name"/>
+        android:text="Cantón" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edit_name"/>
+        android:id="@+id/txtCanton"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Position"/>
+        android:text="Distrito" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edit_position"/>
+        android:id="@+id/txtDistrito"/>
+
     <Button
+        android:id="@+id/btnGuardar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_submit"
         android:background="@android:color/holo_blue_dark"
-        android:text="Submit"
-        android:textColor="@android:color/white"/>
+        android:text="Guardar"
+        android:textColor="@android:color/white" />
+
     <Button
+        android:id="@+id/btnLista"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_open"
-        android:text="Open" />
+        android:text="Lista" />
 
 </LinearLayout>

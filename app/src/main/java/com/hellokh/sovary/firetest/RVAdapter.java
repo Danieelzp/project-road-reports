@@ -16,15 +16,15 @@ import java.util.ArrayList;
 public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
     private Context context;
-    ArrayList<Employee> list = new ArrayList<>();
+    ArrayList<DerrumbeHueco> list = new ArrayList<>();
 
     public RVAdapter(Context ctx)
     {
         this.context = ctx;
     }
-    public void setItems(ArrayList<Employee> emp)
+    public void setItems(ArrayList<DerrumbeHueco> dh)
     {
-        list.addAll(emp);
+        list.addAll(dh);
     }
 
     @NonNull
@@ -32,21 +32,21 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         View view = LayoutInflater.from(context).inflate(R.layout.layout_item,parent,false);
-        return new EmployeeVH(view);
+        return new DerrumbeHuecoVH(view);
     }
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position)
     {
-        Employee e = null;
+        DerrumbeHueco e = null;
         this.onBindViewHolder(holder,position,e);
     }
 
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position, Employee e)
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position, DerrumbeHueco e)
     {
-        EmployeeVH vh = (EmployeeVH) holder;
-        Employee emp = e==null? list.get(position):e;
-        vh.txt_name.setText(emp.getName());
-        vh.txt_position.setText(emp.getPosition());
+        DerrumbeHuecoVH vh = (DerrumbeHuecoVH) holder;
+        DerrumbeHueco dh = e==null? list.get(position):e;
+        vh.lblCanton.setText(dh.getCanton());
+        vh.lblDistrito.setText(dh.getDistrito());
         vh.txt_option.setOnClickListener(v->
         {
             PopupMenu popupMenu =new PopupMenu(context,vh.txt_option);
@@ -57,16 +57,16 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 {
                     case R.id.menu_edit:
                         Intent intent=new Intent(context,MainActivity.class);
-                        intent.putExtra("EDIT",emp);
+                        intent.putExtra("EDITAR",dh);
                         context.startActivity(intent);
                         break;
                     case R.id.menu_remove:
-                        DAOEmployee dao=new DAOEmployee();
-                        dao.remove(emp.getKey()).addOnSuccessListener(suc->
+                        DAODerrumbeHueco dao=new DAODerrumbeHueco();
+                        dao.remove(dh.getKey()).addOnSuccessListener(suc->
                         {
-                            Toast.makeText(context, "Record is removed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Registro eliminado", Toast.LENGTH_SHORT).show();
                             notifyItemRemoved(position);
-                            list.remove(emp);
+                            list.remove(dh);
                         }).addOnFailureListener(er->
                         {
                             Toast.makeText(context, ""+er.getMessage(), Toast.LENGTH_SHORT).show();
