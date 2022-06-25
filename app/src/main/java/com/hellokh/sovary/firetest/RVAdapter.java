@@ -17,6 +17,7 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
     private Context context;
     ArrayList<Employee> list = new ArrayList<>();
+
     public RVAdapter(Context ctx)
     {
         this.context = ctx;
