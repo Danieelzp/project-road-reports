@@ -9,6 +9,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,6 +21,9 @@ import java.util.ArrayList;
 
 public class RVActivity extends AppCompatActivity
 {
+    GoogleSignInOptions gso;
+    GoogleSignInClient gsc;
+
     SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView recyclerView;
     RVAdapter adapter;
@@ -39,6 +45,11 @@ public class RVActivity extends AppCompatActivity
         recyclerView.setAdapter(adapter);
         dao = new DAODerrumbeHueco();
         loadData();
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        gsc = GoogleSignIn.getClient(this, gso);
 
         btnNuevo.setOnClickListener(v->
         {
