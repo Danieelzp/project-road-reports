@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">FireTest</string>
     <string name="title_activity_rv">RVActivity</string>
+    <string name="nuevo">Nuevo</string>
 </resources>

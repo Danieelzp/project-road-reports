@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -27,6 +29,7 @@ public class RVActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rv);
+        FloatingActionButton btnNuevo = findViewById(R.id.btnNuevo);
         swipeRefreshLayout = findViewById(R.id.swip);
         recyclerView = findViewById(R.id.rv);
         recyclerView.setHasFixedSize(true);
@@ -36,6 +39,13 @@ public class RVActivity extends AppCompatActivity
         recyclerView.setAdapter(adapter);
         dao = new DAODerrumbeHueco();
         loadData();
+
+        btnNuevo.setOnClickListener(v->
+        {
+            Intent intent = new Intent(RVActivity.this, FormActivity.class);
+            startActivity(intent);
+        });
+
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
         {
             @Override
@@ -58,7 +68,7 @@ public class RVActivity extends AppCompatActivity
 
     private void loadData()
     {
-        
+
         swipeRefreshLayout.setRefreshing(true);
         dao.get(key).addListenerForSingleValueEvent(new ValueEventListener()
         {

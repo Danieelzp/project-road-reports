@@ -56,7 +56,7 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 switch (item.getItemId())
                 {
                     case R.id.menu_edit:
-                        Intent intent=new Intent(context,MainActivity.class);
+                        Intent intent=new Intent(context,FormActivity.class);
                         intent.putExtra("EDITAR",dh);
                         context.startActivity(intent);
                         break;

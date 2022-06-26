@@ -14,36 +14,10 @@
         android:scaleType="fitXY"
         android:src="@drawable/roadbanner" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cantón" />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtCanton"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Distrito" />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtDistrito"/>
-
     <Button
-        android:id="@+id/btnGuardar"
+        android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_dark"
-        android:text="Guardar"
-        android:textColor="@android:color/white" />
-
-    <Button
-        android:id="@+id/btnLista"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Lista" />
+        android:text="Ingresar" />
 
 </LinearLayout>
