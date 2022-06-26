@@ -11,34 +11,72 @@
         android:id="@+id/txt_option"
         android:layout_gravity="right"
         android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/lblEstado"
+        android:layout_width="103dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|end"
+        android:layout_marginEnd="20dp"
+        android:text="Activo"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/lblFecha"
+        android:layout_width="146dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="8dp"
+        android:text="Fecha"
+        android:textAlignment="center"
+        android:textSize="14sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <ImageView
-            android:layout_width="96dp"
+            android:id="@+id/img_dh"
+            android:layout_width="81dp"
             android:layout_height="96dp"
-            android:src="@drawable/googleg_standard_color_18"
             android:padding="5dp"
-            android:id="@+id/img_dh"/>
+            android:src="@drawable/ic_baseline_directions_car_24" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
+                android:id="@+id/lblCanton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Text"
-                android:textSize="20sp"
                 android:layout_marginBottom="5dp"
-                android:id="@+id/lblCanton"/>
+                android:text="Canton"
+                android:textStyle="bold"
+                android:textSize="20sp" />
+
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/lblDistrito"
+                android:layout_width="179dp"
                 android:layout_height="wrap_content"
-                android:text="Text"
-                android:textSize="20sp"
                 android:layout_marginBottom="5dp"
-                android:id="@+id/lblDistrito"/>
+                android:text="Distrito"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/lblSeveridad"
+                android:layout_width="127dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Severidad"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -47,6 +47,9 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         DerrumbeHueco dh = e==null? list.get(position):e;
         vh.lblCanton.setText(dh.getCanton());
         vh.lblDistrito.setText(dh.getDistrito());
+        vh.lblSeveridad.setText(dh.getSeveridad());
+        vh.lblEstado.setText(dh.getEstado());
+        vh.lblFecha.setText(dh.getFecha());
         vh.txt_option.setOnClickListener(v->
         {
             PopupMenu popupMenu =new PopupMenu(context,vh.txt_option);

@@ -22,6 +22,8 @@ public class FormActivity extends AppCompatActivity
 
         final EditText edit_canton = findViewById(R.id.txtCanton);
         final EditText edit_distrito = findViewById(R.id.txtDistrito);
+        final EditText edit_severidad = findViewById(R.id.txtSeveridad);
+        final EditText edit_estado = findViewById(R.id.txtEstado);
 
         Button btnGuardar = findViewById(R.id.btnGuardar);
         Button btnLista = findViewById(R.id.btnLista);
@@ -40,6 +42,8 @@ public class FormActivity extends AppCompatActivity
             btnGuardar.setText("Editar");
             edit_canton.setText(dh_edit.getCanton());
             edit_distrito.setText(dh_edit.getDistrito());
+            edit_severidad.setText(dh_edit.getSeveridad());
+            edit_estado.setText(dh_edit.getEstado());
             btnLista.setVisibility(View.GONE);
         }
         else
@@ -50,13 +54,15 @@ public class FormActivity extends AppCompatActivity
 
         btnGuardar.setOnClickListener(v->
         {
-            DerrumbeHueco dh = new DerrumbeHueco(edit_canton.getText().toString(), edit_distrito.getText().toString());
+            DerrumbeHueco dh = new DerrumbeHueco(edit_canton.getText().toString(), edit_distrito.getText().toString(), edit_severidad.getText().toString(), edit_estado.getText().toString(),"Fecha de hoy");
             if(dh_edit==null)
             {
                 dao.add(dh).addOnSuccessListener(suc ->
                 {
                     edit_canton.setText("");
                     edit_distrito.setText("");
+                    edit_severidad.setText("");
+                    edit_estado.setText("");
                     Toast.makeText(this, "Registro guardado", Toast.LENGTH_SHORT).show();
                     finish();
                 }).addOnFailureListener(er ->
@@ -69,6 +75,9 @@ public class FormActivity extends AppCompatActivity
                 HashMap<String, Object> hashMap = new HashMap<>();
                 hashMap.put("canton", edit_canton.getText().toString());
                 hashMap.put("distrito", edit_distrito.getText().toString());
+                hashMap.put("severidad", edit_severidad.getText().toString());
+                hashMap.put("estado", edit_estado.getText().toString());
+                hashMap.put("fecha", "Fecha de ayer");
                 dao.update(dh_edit.getKey(), hashMap).addOnSuccessListener(suc ->
                 {
                     Toast.makeText(this, "Registro editado", Toast.LENGTH_SHORT).show();

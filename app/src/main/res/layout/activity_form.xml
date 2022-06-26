@@ -26,6 +26,24 @@
         android:layout_height="wrap_content"
         android:id="@+id/txtDistrito"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Severidad" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtSeveridad"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Estado" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtEstado"/>
+
     <Button
         android:id="@+id/btnGuardar"
         android:layout_width="match_parent"
