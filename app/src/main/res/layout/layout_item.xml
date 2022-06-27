@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="2dp">
@@ -14,23 +15,24 @@
 
     <TextView
         android:id="@+id/lblEstado"
-        android:layout_width="103dp"
+        android:layout_width="154dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center|end"
         android:layout_marginEnd="20dp"
-        android:text="Activo"
+        android:text="No reparado"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/lblFecha"
-        android:layout_width="146dp"
+        android:layout_width="107dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="8dp"
         android:text="Fecha"
+        android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
         android:textAlignment="center"
         android:textSize="14sp" />
 
@@ -62,7 +64,7 @@
 
             <TextView
                 android:id="@+id/lblDistrito"
-                android:layout_width="179dp"
+                android:layout_width="142dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:text="Distrito"
@@ -70,7 +72,7 @@
 
             <TextView
                 android:id="@+id/lblSeveridad"
-                android:layout_width="127dp"
+                android:layout_width="86dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Severidad"

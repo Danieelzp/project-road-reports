@@ -8,7 +8,30 @@
         <item>Alta</item>
     </string-array>
     <string-array name="estado_array">
-        <item>Activo</item>
-        <item>Inactivo</item>
+        <item>No reparado</item>
+        <item>Reparado</item>
+    </string-array>
+    <string-array name="cantones_array">
+        <item>Nicoya</item>
+        <item>Liberia</item>
+        <item>Bagaces</item>
+    </string-array>
+    <string-array name="distritos_nicoya_array">
+        <item>Nicoya</item>
+        <item>Mansión</item>
+        <item>Sámara</item>
+        <item>Nosara</item>
+    </string-array>
+    <string-array name="distritos_liberia_array">
+        <item>Liberia</item>
+        <item>Cañas Dulces</item>
+        <item>Mayorga</item>
+        <item>Nacascolo</item>
+    </string-array>
+    <string-array name="distritos_bagaces_array">
+        <item>Bagaces</item>
+        <item>La Fortuna</item>
+        <item>Mogote</item>
+        <item>Río Naranjo</item>
     </string-array>
 </resources>

@@ -81,6 +81,15 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             });
             popupMenu.show();
         });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, FormActivity.class);
+                intent.putExtra("DETALLES",dh);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

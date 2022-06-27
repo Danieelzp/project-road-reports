@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,24 +27,71 @@ public class FormActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
 
+        TextView txtCanton = findViewById(R.id.txtCanton);
+        TextView txtDistrito = findViewById(R.id.txtDistrito);
+        TextView txtSeveridad = findViewById(R.id.txtSeveridad);
+        TextView txtEstado = findViewById(R.id.txtEstado);
+        TextView txtFecha = findViewById(R.id.txtFecha);
+
+        Spinner cbxCanton = (Spinner) findViewById(R.id.cbxCanton);
+        Spinner cbxDistrito= (Spinner) findViewById(R.id.cbxDistrito);
         Spinner cbxSeveridad = (Spinner) findViewById(R.id.cbxSeveridad);
         Spinner cbxEstado = (Spinner) findViewById(R.id.cbxEstado);
-        ArrayAdapter<CharSequence> adapterSeveridad = ArrayAdapter.createFromResource(this,
-                R.array.severidad_array, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> adapterEstado = ArrayAdapter.createFromResource(this,
-                R.array.estado_array, android.R.layout.simple_spinner_item);
+
+        ArrayAdapter<CharSequence> adapterCantones = ArrayAdapter.createFromResource(this, R.array.cantones_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapterDistritosNicoya = ArrayAdapter.createFromResource(this, R.array.distritos_nicoya_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapterDistritosLiberia = ArrayAdapter.createFromResource(this, R.array.distritos_liberia_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapterDistritosBagaces = ArrayAdapter.createFromResource(this, R.array.distritos_bagaces_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapterSeveridad = ArrayAdapter.createFromResource(this, R.array.severidad_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapterEstado = ArrayAdapter.createFromResource(this, R.array.estado_array, android.R.layout.simple_spinner_item);
+
+        cbxCanton.setAdapter(adapterCantones);
         cbxSeveridad.setAdapter(adapterSeveridad);
         cbxEstado.setAdapter(adapterEstado);
 
+        final String[] canton = new String[1];
+        final String[] distrito = new String[1];
         final String[] severidad = new String[1];
         final String[] estado = new String[1];
-        final EditText edit_canton = findViewById(R.id.txtCanton);
-        final EditText edit_distrito = findViewById(R.id.txtDistrito);
         String fecha = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
         Button btnGuardar = findViewById(R.id.btnGuardar);
         Button btnLista = findViewById(R.id.btnLista);
 
+        cbxCanton.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                canton[0] = adapterView.getItemAtPosition(i).toString();
+
+                if(canton[0].equals("Nicoya")){
+                    cbxDistrito.setAdapter(adapterDistritosNicoya);
+
+                }   else if(canton[0].equals("Liberia")){
+                    cbxDistrito.setAdapter(adapterDistritosLiberia);
+
+                }   else if(canton[0].equals("Bagaces")){
+                    cbxDistrito.setAdapter(adapterDistritosBagaces);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        cbxDistrito.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                distrito[0] = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         cbxSeveridad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -78,27 +126,69 @@ public class FormActivity extends AppCompatActivity
 
         DAODerrumbeHueco dao = new DAODerrumbeHueco();
         DerrumbeHueco dh_edit = (DerrumbeHueco)getIntent().getSerializableExtra("EDITAR");
-        if(dh_edit != null)
+        DerrumbeHueco dh_details = (DerrumbeHueco)getIntent().getSerializableExtra("DETALLES");
+        if(dh_edit != null && dh_details == null)
         {
             btnGuardar.setText("Editar");
-            edit_canton.setText(dh_edit.getCanton());
-            edit_distrito.setText(dh_edit.getDistrito());
+            int cantonPosition = adapterCantones.getPosition(dh_edit.getCanton());
+            cbxCanton.setSelection(cantonPosition);
+
+            //Este código es para seleccionar el distrito al entrar en editar, pero no sé por qué no funciona
+            /*if(dh_edit.getCanton()=="Nicoya"){
+                cbxDistrito.setAdapter(adapterDistritosNicoya);
+                int distritoPosition = adapterDistritosNicoya.getPosition(dh_edit.getDistrito());
+                cbxDistrito.setSelection(distritoPosition);
+
+            }else if(dh_edit.getCanton()=="Liberia"){
+                cbxDistrito.setAdapter(adapterDistritosLiberia);
+                int distritoPosition = adapterDistritosLiberia.getPosition(dh_edit.getDistrito());
+                cbxDistrito.setSelection(distritoPosition);
+
+            }else if(dh_edit.getCanton()=="Bagaces"){
+                cbxDistrito.setAdapter(adapterDistritosBagaces);
+                int distritoPosition = adapterDistritosBagaces.getPosition(dh_edit.getDistrito());
+                cbxDistrito.setSelection(distritoPosition);
+            }*/
+
             int severidadPosition = adapterSeveridad.getPosition(dh_edit.getSeveridad());
             cbxSeveridad.setSelection(severidadPosition);
             int estadoPosition = adapterEstado.getPosition(dh_edit.getEstado());
             cbxEstado.setSelection(estadoPosition);
 
-            //btnLista.setVisibility(View.GONE);
+            txtCanton.setVisibility(View.GONE);
+            txtDistrito.setVisibility(View.GONE);
+            txtSeveridad.setVisibility(View.GONE);
+            txtEstado.setVisibility(View.GONE);
+            txtFecha.setVisibility(View.GONE);
+        }
+        else if(dh_edit == null && dh_details != null){
+
+            txtCanton.setText(dh_details.getCanton());
+            txtDistrito.setText(dh_details.getDistrito());
+            txtSeveridad.setText(dh_details.getSeveridad());
+            txtEstado.setText(dh_details.getEstado());
+            txtFecha.setText(dh_details.getFecha());
+
+            cbxCanton.setVisibility(View.GONE);
+            cbxDistrito.setVisibility(View.GONE);
+            cbxSeveridad.setVisibility(View.GONE);
+            cbxEstado.setVisibility(View.GONE);
+            btnGuardar.setVisibility(View.GONE);
+            btnLista.setText("Volver");
         }
         else
         {
+            txtCanton.setVisibility(View.GONE);
+            txtDistrito.setVisibility(View.GONE);
+            txtSeveridad.setVisibility(View.GONE);
+            txtEstado.setVisibility(View.GONE);
+            txtFecha.setVisibility(View.GONE);
             btnGuardar.setText("Guardar");
-            //btnLista.setVisibility(View.VISIBLE);
         }
 
         btnGuardar.setOnClickListener(v->
         {
-            DerrumbeHueco dh = new DerrumbeHueco(edit_canton.getText().toString(), edit_distrito.getText().toString(), severidad[0], estado[0],fecha);
+            DerrumbeHueco dh = new DerrumbeHueco(canton[0], distrito[0], severidad[0], estado[0],fecha);
             if(dh_edit==null)
             {
                 dao.add(dh).addOnSuccessListener(suc ->
@@ -116,8 +206,8 @@ public class FormActivity extends AppCompatActivity
             {
                 String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
                 HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put("canton", edit_canton.getText().toString());
-                hashMap.put("distrito", edit_distrito.getText().toString());
+                hashMap.put("canton", canton[0]);
+                hashMap.put("distrito", distrito[0]);
                 hashMap.put("severidad", severidad[0]);
                 hashMap.put("estado", estado[0]);
                 hashMap.put("fecha", date);

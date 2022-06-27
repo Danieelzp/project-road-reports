@@ -11,42 +11,88 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cantón" />
-    <EditText
+        android:text="Cantón"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/txtCanton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtCanton"/>
+        android:textSize="18dp"
+        android:layout_marginBottom="16dp"
+        android:text="TextView" />
+
+    <Spinner
+        android:id="@+id/cbxCanton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Distrito" />
-    <EditText
+        android:text="Distrito"
+        android:textSize="20dp"/>
+    <TextView
+        android:id="@+id/txtDistrito"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtDistrito"/>
+        android:textSize="18dp"
+        android:layout_marginBottom="16dp"
+        android:text="TextView" />
+    <Spinner
+        android:id="@+id/cbxDistrito"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Severidad" />
+        android:text="Severidad"
+        android:textSize="20dp"/>
+    <TextView
+        android:id="@+id/txtSeveridad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:layout_marginBottom="16dp"
+        android:text="TextView" />
 
     <Spinner
         android:id="@+id/cbxSeveridad"
-        android:layout_width="145dp"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Estado" />
+        android:text="Estado"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/txtEstado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:layout_marginBottom="16dp"
+        android:text="TextView" />
 
     <Spinner
         android:id="@+id/cbxEstado"
-        android:layout_width="145dp"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:id="@+id/txtFecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:text="TextView"
+        android:drawableLeft="@drawable/ic_baseline_calendar_today_24"
+        android:layout_marginBottom="16dp"/>
 
     <Button
         android:id="@+id/btnGuardar"
