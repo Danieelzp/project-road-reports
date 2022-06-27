@@ -55,6 +55,7 @@ public class RVActivity extends AppCompatActivity
         {
             Intent intent = new Intent(RVActivity.this, FormActivity.class);
             startActivity(intent);
+            finish();
         });
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()

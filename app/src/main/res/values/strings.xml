@@ -2,4 +2,13 @@
     <string name="app_name">FireTest</string>
     <string name="title_activity_rv">RVActivity</string>
     <string name="nuevo">Nuevo</string>
+    <string-array name="severidad_array">
+        <item>Baja</item>
+        <item>Media</item>
+        <item>Alta</item>
+    </string-array>
+    <string-array name="estado_array">
+        <item>Activo</item>
+        <item>Inactivo</item>
+    </string-array>
 </resources>

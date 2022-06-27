@@ -30,19 +30,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Severidad" />
-    <EditText
-        android:layout_width="match_parent"
+
+    <Spinner
+        android:id="@+id/cbxSeveridad"
+        android:layout_width="145dp"
         android:layout_height="wrap_content"
-        android:id="@+id/txtSeveridad"/>
+        android:layout_marginBottom="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Estado" />
-    <EditText
-        android:layout_width="match_parent"
+
+    <Spinner
+        android:id="@+id/cbxEstado"
+        android:layout_width="145dp"
         android:layout_height="wrap_content"
-        android:id="@+id/txtEstado"/>
+        android:layout_marginBottom="10dp"/>
 
     <Button
         android:id="@+id/btnGuardar"
