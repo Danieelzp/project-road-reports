@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Road Reports</string>
     <string name="title_activity_rv">RVActivity</string>
+    <string name="title_activity_maps">Map</string>
     <string name="nuevo">Nuevo</string>
     <string-array name="severidad_array">
         <item>Baja</item>

@@ -2,14 +2,12 @@ package com.hellokh.sovary.firetest;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -53,6 +51,7 @@ public class FormActivity extends AppCompatActivity
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //Todos los componentes del formulario
         TextView txtCanton = findViewById(R.id.txtCanton);
         TextView txtDistrito = findViewById(R.id.txtDistrito);
         TextView txtSeveridad = findViewById(R.id.txtSeveridad);
@@ -82,7 +81,8 @@ public class FormActivity extends AppCompatActivity
         String fecha = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
         Button btnGuardar = findViewById(R.id.btnGuardar);
-        Button btnLista = findViewById(R.id.btnLista);
+        Button btnCancelar = findViewById(R.id.btnCancelar);
+        Button btnUbicacion = findViewById(R.id.btnUbicacion);
 
         imgDerrumbe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +91,7 @@ public class FormActivity extends AppCompatActivity
             }
         });
 
+        //Método para llenar el Spinner de Distritos conforme a lo que seleccionemos en Canton
         cbxCanton.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -150,7 +151,7 @@ public class FormActivity extends AppCompatActivity
             }
         });
 
-        btnLista.setOnClickListener(v->
+        btnCancelar.setOnClickListener(v->
         {
             Intent intent = new Intent(FormActivity.this, RVActivity.class);
             startActivity(intent);
@@ -193,6 +194,7 @@ public class FormActivity extends AppCompatActivity
             txtSeveridad.setVisibility(View.GONE);
             txtEstado.setVisibility(View.GONE);
             txtFecha.setVisibility(View.GONE);
+            btnUbicacion.setVisibility(View.GONE);
         }
         else if(dh_edit == null && dh_details != null){
 
@@ -207,7 +209,7 @@ public class FormActivity extends AppCompatActivity
             cbxSeveridad.setVisibility(View.GONE);
             cbxEstado.setVisibility(View.GONE);
             btnGuardar.setVisibility(View.GONE);
-            btnLista.setText("Volver");
+            btnCancelar.setText("Volver");
         }
         else
         {
@@ -216,6 +218,7 @@ public class FormActivity extends AppCompatActivity
             txtSeveridad.setVisibility(View.GONE);
             txtEstado.setVisibility(View.GONE);
             txtFecha.setVisibility(View.GONE);
+            btnUbicacion.setVisibility(View.GONE);
             btnGuardar.setText("Guardar");
         }
 
@@ -258,6 +261,13 @@ public class FormActivity extends AppCompatActivity
             }
         });
 
+        btnUbicacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
