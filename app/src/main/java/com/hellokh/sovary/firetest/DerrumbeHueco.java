@@ -15,14 +15,16 @@ public class DerrumbeHueco implements Serializable
     private String severidad;
     private String estado;
     private String fecha;
+    private String image;
     public DerrumbeHueco(){}
-    public DerrumbeHueco(String canton, String distrito, String severidad, String estado, String fecha)
+    public DerrumbeHueco(String canton, String distrito, String severidad, String estado, String fecha, String image)
     {
         this.canton = canton;
         this.distrito = distrito;
         this.severidad = severidad;
         this.estado = estado;
         this.fecha = fecha;
+        this.image = image;
     }
 
     public String getCanton()
@@ -77,5 +79,13 @@ public class DerrumbeHueco implements Serializable
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
