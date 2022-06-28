@@ -51,6 +51,8 @@ public class FormActivity extends AppCompatActivity
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         TextView txtCanton = findViewById(R.id.txtCanton);
         TextView txtDistrito = findViewById(R.id.txtDistrito);
         TextView txtSeveridad = findViewById(R.id.txtSeveridad);

@@ -17,7 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FormActivity"></activity>
+        <activity android:name=".FormActivity"
+            android:parentActivityName=".RVActivity"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
