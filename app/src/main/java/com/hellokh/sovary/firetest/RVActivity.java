@@ -19,9 +19,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RVActivity extends AppCompatActivity {
     GoogleSignInOptions gso;
@@ -45,6 +47,8 @@ public class RVActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
+
+
         adapter = new RVAdapter(this);
         recyclerView.setAdapter(adapter);
         dao = new DAODerrumbeHueco();
