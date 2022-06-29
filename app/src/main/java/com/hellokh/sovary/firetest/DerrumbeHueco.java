@@ -4,7 +4,7 @@ import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
 
-public class DerrumbeHueco implements Serializable
+public class DerrumbeHueco implements Serializable, Comparable<DerrumbeHueco>
 {
 
 
@@ -87,5 +87,10 @@ public class DerrumbeHueco implements Serializable
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    @Override
+    public int compareTo(DerrumbeHueco derrumbeHueco) {
+        return getFecha().compareTo(derrumbeHueco.getFecha());
     }
 }

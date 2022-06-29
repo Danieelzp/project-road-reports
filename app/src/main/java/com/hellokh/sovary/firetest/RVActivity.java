@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class RVActivity extends AppCompatActivity {
     GoogleSignInOptions gso;
@@ -55,7 +56,6 @@ public class RVActivity extends AppCompatActivity {
                 .build();
 
         gsc = GoogleSignIn.getClient(this, gso);
-
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +110,7 @@ public class RVActivity extends AppCompatActivity {
                     dhs.add(dh);
                     key = data.getKey();
                 }
+                Collections.sort(dhs);
                 adapter.setItems(dhs);
                 adapter.notifyDataSetChanged();
                 isLoading = false;
