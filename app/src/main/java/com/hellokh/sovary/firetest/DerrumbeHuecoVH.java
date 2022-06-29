@@ -1,6 +1,7 @@
 package com.hellokh.sovary.firetest;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class DerrumbeHuecoVH extends RecyclerView.ViewHolder
 {
     public TextView lblCanton,lblDistrito, lblSeveridad, lblEstado, lblFecha, txt_option;
+    public ImageView imageView;
     public DerrumbeHuecoVH(@NonNull View itemView)
     {
         super(itemView);
@@ -18,5 +20,6 @@ public class DerrumbeHuecoVH extends RecyclerView.ViewHolder
         lblEstado = itemView.findViewById(R.id.lblEstado);
         lblFecha = itemView.findViewById(R.id.lblFecha);
         txt_option = itemView.findViewById(R.id.txt_option);
+        imageView = itemView.findViewById(R.id.img_dh);
     }
 }

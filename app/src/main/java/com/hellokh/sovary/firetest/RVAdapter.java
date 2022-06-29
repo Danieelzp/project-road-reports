@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
@@ -45,6 +47,10 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     {
         DerrumbeHuecoVH vh = (DerrumbeHuecoVH) holder;
         DerrumbeHueco dh = e==null? list.get(position):e;
+
+        Picasso.with(context)
+                        .load(dh.getImage())
+                                .fit().centerInside().into(vh.imageView);
         vh.lblCanton.setText(dh.getCanton());
         vh.lblDistrito.setText(dh.getDistrito());
         vh.lblSeveridad.setText(dh.getSeveridad());

@@ -58,6 +58,9 @@ public class FormActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
+        DAODerrumbeHueco dao = new DAODerrumbeHueco();
+        DerrumbeHueco dh_edit = (DerrumbeHueco)getIntent().getSerializableExtra("EDITAR");
+        DerrumbeHueco dh_details = (DerrumbeHueco)getIntent().getSerializableExtra("DETALLES");
 
         mImageView = findViewById(R.id.imgDerrumbe);
 
@@ -93,13 +96,6 @@ public class FormActivity extends AppCompatActivity
         Button btnCancelar = findViewById(R.id.btnCancelar);
         Button btnSubirImagen = findViewById(R.id.btnSubirImagen);
         Button btnUbicacion = findViewById(R.id.btnUbicacion);
-
-       /* imgDerrumbe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                choosePicture();
-            }
-        });*/
 
 
         //Método para llenar el Spinner de Distritos conforme a lo que seleccionemos en Canton
@@ -176,9 +172,7 @@ public class FormActivity extends AppCompatActivity
             }
         });
 
-        DAODerrumbeHueco dao = new DAODerrumbeHueco();
-        DerrumbeHueco dh_edit = (DerrumbeHueco)getIntent().getSerializableExtra("EDITAR");
-        DerrumbeHueco dh_details = (DerrumbeHueco)getIntent().getSerializableExtra("DETALLES");
+       //EDITAR
         if(dh_edit != null && dh_details == null)
         {
             btnGuardar.setText("Editar");
@@ -213,8 +207,10 @@ public class FormActivity extends AppCompatActivity
             txtEstado.setVisibility(View.GONE);
             txtFecha.setVisibility(View.GONE);
             btnUbicacion.setVisibility(View.GONE);
+            mImageView.setVisibility(View.GONE);
             btnSubirImagen.setVisibility(View.GONE);
         }
+        //DETALLES
         else if(dh_edit == null && dh_details != null){
 
             txtCanton.setText(dh_details.getCanton());
@@ -231,6 +227,7 @@ public class FormActivity extends AppCompatActivity
             btnSubirImagen.setVisibility(View.GONE);
             btnCancelar.setText("Volver");
         }
+        //CREAR
         else
         {
             txtCanton.setVisibility(View.GONE);
@@ -244,20 +241,9 @@ public class FormActivity extends AppCompatActivity
 
         btnGuardar.setOnClickListener(v->
         {
-            //DerrumbeHueco dh = new DerrumbeHueco(canton[0], distrito[0], severidad[0], estado[0],fecha);
             if(dh_edit==null)
             {
                 uploadFile();
-               /* dao.add(dh).addOnSuccessListener(suc ->
-                {
-                    Intent intent = new Intent(FormActivity.this, RVActivity.class);
-                    startActivity(intent);
-                    finish();
-                    Toast.makeText(this, "Registro guardado", Toast.LENGTH_SHORT).show();
-                }).addOnFailureListener(er ->
-                {
-                    Toast.makeText(this, "" + er.getMessage(), Toast.LENGTH_SHORT).show();
-                });*/
             }
             else
             {
@@ -292,23 +278,6 @@ public class FormActivity extends AppCompatActivity
 
     }
 
-   /* private void choosePicture() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, 1);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            imageUri = data.getData();
-            imgDerrumbe.setImageURI(imageUri);
-            uploadPicture();
-        }
-    }*/
-
     private void openFileChooser(){
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -335,7 +304,7 @@ public class FormActivity extends AppCompatActivity
     private void uploadFile(){
         if(mImageUri != null){
             final ProgressDialog pd = new ProgressDialog(this);
-            pd.setTitle("Uploading Image...");
+            pd.setTitle("Cargando imagen...");
             pd.show();
 
             StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
@@ -366,43 +335,12 @@ public class FormActivity extends AppCompatActivity
                         @Override
                         public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
                             double progressPercent = (100.00 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            pd.setMessage("Percentage: " + (int) progressPercent + "%");
+                            pd.setMessage("Porcentaje: " + (int) progressPercent + "%");
                         }
                     });
         }else{
             Toast.makeText(this,"Debe subir una imagen", Toast.LENGTH_SHORT).show();
         }
     }
-
-   /* private void uploadPicture() {
-        final ProgressDialog pd = new ProgressDialog(this);
-        pd.setTitle("Uploading Image...");
-        pd.show();
-
-        final String randomKey = UUID.randomUUID().toString();
-        StorageReference stRef = storageReference.child("images/" + randomKey);
-
-        stRef.putFile(imageUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        pd.dismiss();
-                        Snackbar.make(findViewById(android.R.id.content), "Image Uploaded.", Snackbar.LENGTH_LONG).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        pd.dismiss();
-                        Toast.makeText(getApplicationContext(), "Failed to Upload", Toast.LENGTH_LONG).show();
-                    }
-                })
-                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
-                        double progressPercent = (100.00 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                        pd.setMessage("Percentage: " + (int) progressPercent + "%");
-                    }
-                });*/
 
 }

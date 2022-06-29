@@ -25,6 +25,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cantón"
+        android:textStyle="bold"
+        android:textColor="@color/design_default_color_primary_dark"
         android:textSize="20dp"/>
 
     <TextView
@@ -45,6 +47,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Distrito"
+        android:textStyle="bold"
+        android:textColor="@color/design_default_color_primary_dark"
         android:textSize="20dp"/>
     <TextView
         android:id="@+id/txtDistrito"
@@ -63,12 +67,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Severidad"
+        android:textStyle="bold"
+        android:textColor="@color/design_default_color_primary_dark"
         android:textSize="20dp"/>
     <TextView
         android:id="@+id/txtSeveridad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18dp"
+
         android:layout_marginBottom="16dp"
         android:text="TextView" />
 
@@ -82,6 +89,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Estado"
+        android:textStyle="bold"
+        android:textColor="@color/design_default_color_primary_dark"
         android:textSize="20dp"/>
 
     <TextView
