@@ -3,8 +3,13 @@ package com.hellokh.sovary.firetest;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
@@ -18,6 +23,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,6 +36,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -39,9 +47,11 @@ import java.util.UUID;
 public class FormActivity extends AppCompatActivity
 {
     private static final int PICK_IMAGE_REQUEST = 1;
+    private static final int REQUEST_IMAGE_CAPTURE = 101;
 
     private ImageView mImageView;
     public Uri mImageUri;
+    String rutaImagen;
 
     private FirebaseStorage storage;
     private StorageReference mStorageRef;
@@ -96,6 +106,7 @@ public class FormActivity extends AppCompatActivity
         Button btnCancelar = findViewById(R.id.btnCancelar);
         Button btnSubirImagen = findViewById(R.id.btnSubirImagen);
         Button btnUbicacion = findViewById(R.id.btnUbicacion);
+        Button btnCapturarImagen = findViewById(R.id.btnCapturarImagen);
 
 
         //Método para llenar el Spinner de Distritos conforme a lo que seleccionemos en Canton
@@ -172,6 +183,13 @@ public class FormActivity extends AppCompatActivity
             }
         });
 
+        btnCapturarImagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                takePicture();
+            }
+        });
+
        //EDITAR
         if(dh_edit != null && dh_details == null)
         {
@@ -209,6 +227,7 @@ public class FormActivity extends AppCompatActivity
             btnUbicacion.setVisibility(View.GONE);
             mImageView.setVisibility(View.GONE);
             btnSubirImagen.setVisibility(View.GONE);
+            btnCapturarImagen.setVisibility(View.GONE);
         }
         //DETALLES
         else if(dh_edit == null && dh_details != null){
@@ -225,6 +244,7 @@ public class FormActivity extends AppCompatActivity
             cbxEstado.setVisibility(View.GONE);
             btnGuardar.setVisibility(View.GONE);
             btnSubirImagen.setVisibility(View.GONE);
+            btnCapturarImagen.setVisibility(View.GONE);
             btnCancelar.setText("Volver");
         }
         //CREAR
@@ -285,6 +305,26 @@ public class FormActivity extends AppCompatActivity
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
+    public void takePicture() {
+        Intent imageTakeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(imageTakeIntent.resolveActivity(getPackageManager()) !=null) {
+
+            File imagenArchivo = null;
+
+            try {
+                imagenArchivo = crearImagen();
+            } catch (IOException ex){
+                Log.e("Error", ex.toString());
+            }
+
+            if(imagenArchivo != null){
+                Uri fotoUri = FileProvider.getUriForFile(this, "com.hellokh.sovary.firetest", imagenArchivo);
+                imageTakeIntent.putExtra(MediaStore.EXTRA_OUTPUT, fotoUri);
+                startActivityForResult(imageTakeIntent, REQUEST_IMAGE_CAPTURE);
+            }
+        }
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
@@ -292,6 +332,12 @@ public class FormActivity extends AppCompatActivity
             mImageUri = data.getData();
 
             Picasso.with(this).load(mImageUri).into(mImageView);
+
+        }else if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            //Bundle extras = data.getExtras();
+            Bitmap imageBitmap = BitmapFactory.decodeFile(rutaImagen);
+            //mImageView.setImageBitmap(imageBitmap);
+            Toast.makeText(this,"Imagen guardada en el dispositivo",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -341,6 +387,16 @@ public class FormActivity extends AppCompatActivity
         }else{
             Toast.makeText(this,"Debe subir una imagen", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private File crearImagen() throws IOException {
+        String nombreImagen = "foto_";
+        File directorio = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imagen = File.createTempFile(nombreImagen,".jpg", directorio);
+
+        rutaImagen = imagen.getAbsolutePath();
+        return imagen;
+
     }
 
 }
