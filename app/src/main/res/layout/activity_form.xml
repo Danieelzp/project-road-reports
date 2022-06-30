@@ -48,7 +48,6 @@
         android:layout_height="wrap_content"
         android:text="Cantón"
         android:textStyle="bold"
-        android:textColor="@color/design_default_color_primary_dark"
         android:textSize="20dp"/>
 
     <TextView
@@ -70,7 +69,6 @@
         android:layout_height="wrap_content"
         android:text="Distrito"
         android:textStyle="bold"
-        android:textColor="@color/design_default_color_primary_dark"
         android:textSize="20dp"/>
     <TextView
         android:id="@+id/txtDistrito"
@@ -90,7 +88,6 @@
         android:layout_height="wrap_content"
         android:text="Severidad"
         android:textStyle="bold"
-        android:textColor="@color/design_default_color_primary_dark"
         android:textSize="20dp"/>
     <TextView
         android:id="@+id/txtSeveridad"
@@ -112,7 +109,6 @@
         android:layout_height="wrap_content"
         android:text="Estado"
         android:textStyle="bold"
-        android:textColor="@color/design_default_color_primary_dark"
         android:textSize="20dp"/>
 
     <TextView
@@ -148,6 +144,22 @@
 
     <Button
         android:id="@+id/btnUbicacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_dark"
+        android:text="Abrir Mapa"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/btnUbicacion2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_dark"
+        android:text="Abrir Mapa"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/btnUbicacion3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/holo_blue_dark"

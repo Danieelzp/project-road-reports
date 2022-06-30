@@ -104,9 +104,12 @@ public class FormActivity extends AppCompatActivity
 
         Button btnGuardar = findViewById(R.id.btnGuardar);
         Button btnCancelar = findViewById(R.id.btnCancelar);
+        Button btnCapturarImagen = findViewById(R.id.btnCapturarImagen);
         Button btnSubirImagen = findViewById(R.id.btnSubirImagen);
         Button btnUbicacion = findViewById(R.id.btnUbicacion);
-        Button btnCapturarImagen = findViewById(R.id.btnCapturarImagen);
+        Button btnUbicacion2 = findViewById(R.id.btnUbicacion2);
+        Button btnUbicacion3 = findViewById(R.id.btnUbicacion3);
+
 
 
         //Método para llenar el Spinner de Distritos conforme a lo que seleccionemos en Canton
@@ -197,22 +200,22 @@ public class FormActivity extends AppCompatActivity
             int cantonPosition = adapterCantones.getPosition(dh_edit.getCanton());
             cbxCanton.setSelection(cantonPosition);
 
-            //Este código es para seleccionar el distrito al entrar en editar, pero no sé por qué no funciona
-            /*if(dh_edit.getCanton()=="Nicoya"){
+
+            if(dh_edit.getCanton().equals("Nicoya")){
                 cbxDistrito.setAdapter(adapterDistritosNicoya);
                 int distritoPosition = adapterDistritosNicoya.getPosition(dh_edit.getDistrito());
                 cbxDistrito.setSelection(distritoPosition);
 
-            }else if(dh_edit.getCanton()=="Liberia"){
+            }else if(dh_edit.getCanton().equals("Liberia")){
                 cbxDistrito.setAdapter(adapterDistritosLiberia);
                 int distritoPosition = adapterDistritosLiberia.getPosition(dh_edit.getDistrito());
                 cbxDistrito.setSelection(distritoPosition);
 
-            }else if(dh_edit.getCanton()=="Bagaces"){
+            }else if(dh_edit.getCanton().equals("Bagaces")){
                 cbxDistrito.setAdapter(adapterDistritosBagaces);
                 int distritoPosition = adapterDistritosBagaces.getPosition(dh_edit.getDistrito());
                 cbxDistrito.setSelection(distritoPosition);
-            }*/
+            }
 
             int severidadPosition = adapterSeveridad.getPosition(dh_edit.getSeveridad());
             cbxSeveridad.setSelection(severidadPosition);
@@ -225,6 +228,8 @@ public class FormActivity extends AppCompatActivity
             txtEstado.setVisibility(View.GONE);
             txtFecha.setVisibility(View.GONE);
             btnUbicacion.setVisibility(View.GONE);
+            btnUbicacion2.setVisibility(View.GONE);
+            btnUbicacion3.setVisibility(View.GONE);
             mImageView.setVisibility(View.GONE);
             btnSubirImagen.setVisibility(View.GONE);
             btnCapturarImagen.setVisibility(View.GONE);
@@ -237,6 +242,17 @@ public class FormActivity extends AppCompatActivity
             txtSeveridad.setText(dh_details.getSeveridad());
             txtEstado.setText(dh_details.getEstado());
             txtFecha.setText(dh_details.getFecha());
+
+            if(dh_details.getCanton().equals("Nicoya")){
+                btnUbicacion2.setVisibility(View.GONE);
+                btnUbicacion3.setVisibility(View.GONE);
+            }else if(dh_details.getCanton().equals("Liberia")){
+                btnUbicacion.setVisibility(View.GONE);
+                btnUbicacion3.setVisibility(View.GONE);
+            }else{
+                btnUbicacion.setVisibility(View.GONE);
+                btnUbicacion2.setVisibility(View.GONE);
+            }
 
             cbxCanton.setVisibility(View.GONE);
             cbxDistrito.setVisibility(View.GONE);
@@ -256,6 +272,8 @@ public class FormActivity extends AppCompatActivity
             txtEstado.setVisibility(View.GONE);
             txtFecha.setVisibility(View.GONE);
             btnUbicacion.setVisibility(View.GONE);
+            btnUbicacion2.setVisibility(View.GONE);
+            btnUbicacion3.setVisibility(View.GONE);
             btnGuardar.setText("Guardar");
         }
 
@@ -292,6 +310,22 @@ public class FormActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnUbicacion2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MapsActivity2.class);
+                startActivity(intent);
+            }
+        });
+
+        btnUbicacion3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MapsActivity3.class);
                 startActivity(intent);
             }
         });
